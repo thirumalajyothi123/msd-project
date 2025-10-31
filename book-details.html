@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Details</title>
+    <link rel="stylesheet" href="book detail.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Book Details</h1>
+      <a href="index.html" class="btn">Back to Home</a>
+    </header>
+
+    <section id="book-info">
+      <div class="book-details">
+        <img id="book-image" src="" alt="Book Image" />
+        <div class="book-text">
+          <h2 id="book-title"></h2>
+          <p><strong>Author:</strong> <span id="book-author"></span></p>
+          <p><strong>Subject:</strong> <span id="book-subject"></span></p>
+          <p><strong>Published Date:</strong> <span id="book-date"></span></p>
+          <p><strong>Price:</strong> <span id="book-price"></span></p>
+          <p><strong>About:</strong> <span id="book-about"></span></p>
+          <a id="amazon-link" href="#" target="_blank" class="btn"
+            >Buy on Amazon</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let book = JSON.parse(localStorage.getItem("selectedBook"));
+
+        if (book) {
+          document.getElementById("book-image").src = book.image;
+          document.getElementById("book-title").innerText = book.title;
+          document.getElementById("book-author").innerText = book.author;
+          document.getElementById("book-subject").innerText = book.subject;
+          document.getElementById("book-date").innerText = book.date;
+          document.getElementById("book-price").innerText = book.price;
+          document.getElementById("book-about").innerText = book.about;
+
+          let amazonLink = document.getElementById("amazon-link");
+          if (book.amazon) {
+            amazonLink.href = book.amazon;
+            amazonLink.style.display = "inline-block";
+          } else {
+            amazonLink.style.display = "none"; // Hide if no Amazon link
+          }
+        } else {
+          document.getElementById("book-info").innerHTML =
+            "<p>Book details not found.</p>";
+        }
+      });
+    </script>
+  </body>
+</html>
